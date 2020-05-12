@@ -20,37 +20,39 @@ int main(void) {
 	DDRB = 0xFF; PORTB = 0x00;
 	DDRD = 0xFF; PORTD = 0x00;
 	ADC_init();
+	unsigned short LIMIT = 1024;
 	unsigned char tmpA = 0x00;
     /* Insert your solution below */
     while (1) {
 	unsigned short x = ADC;
-	if(x <= 1024){
-		tmpB = 0x00;
+	if(x <= LIMIT){
+		tmpA = 0x00;
 	}
-	else if(x <= 896){
-		tmpB = 0x01;
+	else if(x <= LIMIT*.875){
+		tmpA = 0x01;
 	}
-        else if(x <= 768){
-                tmpB = 0x02;
+        else if(x <= LIMIT*.75){
+                tmpA = 0x02;
         }
-        else if(x <= 640){
-                tmpB = 0x04;
+        else if(x <= LIMIT*.625){
+                tmpA = 0x04;
         }
-        else if(x <= 512){
-                tmpB = 0x08;
+        else if(x <= LIMIT*.5){
+                tmpA = 0x08;
         }
-        else if(x <= 384){
-                tmpB = 0x10;
+        else if(x <= LIMIT*.375){
+                tmpA = 0x10;
         }
-        else if(x <= 256){
-                tmpB = 0x20;
+        else if(x <= LIMIT*.25){
+                tmpA = 0x20;
         }
-        else if(x <= 128){
-                tmpB = 0x40;
+        else if(x <= LIMIT*.125){
+                tmpA = 0x40;
         }
 	else if(x <= 0){
-		tmpB = 0x80;
+		tmpA= 0x80;
 	}
+	PORTB = tmpA;
 	}
     return 1;
 }
